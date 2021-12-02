@@ -5,9 +5,11 @@ const dotevn = require("dotenv")
 const app = express();
 dotevn.config();
 
+app.use(express.json())
+
 mongoose
     .connect(`${process.env.MONGO_URL}`, {
-        useNewUrlParse: true,
+        useNewUrlParser: true,
         useUnifiedTopology: true,
     })
     .then(() => {
