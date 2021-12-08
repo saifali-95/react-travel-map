@@ -39,6 +39,17 @@ function App() {
     });
   };
 
+  const displayLogin = () => {
+    setShowRegister(false);
+    setShowLogin(true);
+  }
+
+
+  const displayRegister = () => {
+    setShowLogin(false);
+    setShowRegister(true);
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newMarker = {
@@ -125,7 +136,7 @@ function App() {
               </div>
             </Popup>
           )}
-          {newPlace && (
+          {currentUser && newPlace && (
             <>
               <Marker
                 latitude={newPlace.lat}
@@ -184,12 +195,12 @@ function App() {
         <button className="button logout">Logout</button>
       ) : (
         <div className="button">
-          <button className="button login" onClick={() => setShowLogin(true)}>Login</button>
-          <button className="button register" onClick={() => setShowRegister(true)}>Register</button>
+          <button className="button login" onClick={displayLogin}>Login</button>
+          <button className="button register" onClick={displayRegister}>Register</button>
         </div>
       )}
       {showRegister && <Register setShowRegister={setShowRegister}/>}
-      {showLogin && <Login setShowLogin={setShowLogin}/>}
+      {showLogin && <Login setShowLogin={setShowLogin} setCurrentUsername={setCurrentUser}/>}
     </ReactMapGL>
   );
 }
