@@ -5,9 +5,10 @@ import StarIcon from "@mui/icons-material/Star";
 import axios from "axios";
 import "./App.css";
 import { format } from "timeago.js";
+import Register from "./components/Register";
 
 function App() {
-  const [currentUser, setCurrentUser] = useState("Ali");
+  const [currentUser, setCurrentUser] = useState(null);
   const [markers, setMarkers] = useState([]);
   const [newPlace, setNewPlace] = useState(null);
   const [popUpId, setPopUpId] = useState(null);
@@ -182,6 +183,7 @@ function App() {
         <div className="button">
           <button className="button login">Login</button>
           <button className="button register">Register</button>
+          <Register />
         </div>
       )}
     </ReactMapGL>
