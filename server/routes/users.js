@@ -20,7 +20,6 @@ router.post("/register", async (req, res) => {
     const user = await newUser.save();
     res.status(200).json(user._id);
   } catch (err) {
-    console.log(err);
     res.status(500).json(err);
   }
 });
@@ -31,7 +30,6 @@ router.post("/login", async (req, res) => {
     //find user
     const user = await User.findOne({ username: req.body.username });
     !user && res.status(400).json("Wrong username or password");
-
     //validate password
     const validPassword = await bcrypt.compare(
       req.body.password,
