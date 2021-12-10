@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import RoomIcon from "@mui/icons-material/Room";
 import StarIcon from "@mui/icons-material/Star";
@@ -20,6 +20,8 @@ function App() {
   const [star, setStar] = useState(0);
   const [showRegister, setShowRegister] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
+  const citynameRef = useRef()
+  
   const [viewport, setViewport] = useState({
     width: "100vw",
     height: "100vh",
@@ -67,6 +69,22 @@ function App() {
       const res = await axios.post("/marker", newMarker);
       setMarkers([...markers, res.data]);
       setNewPlace(null);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleSearch = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${citynameRef.current.value}.json?access_token=${process.env.REACT_APP_MAPBOX}`);
+      const [long, lat] = res.data.features[0].center;
+      console.log('citname', citynameRef.current.value);
+      console.log(res);
+      setViewport({...viewport, longitude:long, latitude:lat, zoom:4})
+  
+
     } catch (err) {
       console.log(err);
     }
@@ -121,8 +139,8 @@ function App() {
               longitude={p.long}
               closeButton={true}
               closeOnClick={false}
-              offsetLeft={20}
-              offsetTop={10}
+              offsetLeft={15}
+              offsetTop={-10}
               anchor="left"
               onClose={() => setPopUpId(null)}
             >
@@ -200,7 +218,13 @@ function App() {
         </>
       ))}
       {currentUser ? (
-        <button className="button logout" onClick={handleLogout}>Logout</button>
+        <>
+        <div className="button">
+          <input type="text" ref={citynameRef}/>
+          <button className="button search" onClick={handleSearch}>Search</button>
+          <button className="button logout" onClick={handleLogout}>Logout</button>
+        </div>
+        </>
       ) : (
         <div className="button">
           <button className="button login" onClick={displayLogin}>Login</button>
