@@ -138,7 +138,7 @@ function App() {
                 <label>Information</label>
                 <span className="username">
                   Created by{" "}
-                  <b>{p.username === currentUser ? "you" : p.username}</b>
+                  <b>{p.username}</b>
                 </span>
                 <span className="date">{format(p.createdAt)}</span>
               </div>
