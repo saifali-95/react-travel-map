@@ -9,7 +9,9 @@ import Register from "./components/Register";
 import Login from "./components/Login"
 
 function App() {
-  const [currentUser, setCurrentUser] = useState(null);
+  
+  const myStorage = window.localStorage;
+  const [currentUser, setCurrentUser] = useState(myStorage.getItem("user"));
   const [markers, setMarkers] = useState([]);
   const [newPlace, setNewPlace] = useState(null);
   const [popUpId, setPopUpId] = useState(null);
@@ -69,6 +71,12 @@ function App() {
       console.log(err);
     }
   };
+
+  const handleLogout = ()=> {
+    myStorage.removeItem("user");
+    setCurrentUser(null);
+  }
+
 
   useEffect(() => {
     const getMarkers = async () => {
@@ -192,7 +200,7 @@ function App() {
         </>
       ))}
       {currentUser ? (
-        <button className="button logout">Logout</button>
+        <button className="button logout" onClick={handleLogout}>Logout</button>
       ) : (
         <div className="button">
           <button className="button login" onClick={displayLogin}>Login</button>
@@ -200,7 +208,7 @@ function App() {
         </div>
       )}
       {showRegister && <Register setShowRegister={setShowRegister}/>}
-      {showLogin && <Login setShowLogin={setShowLogin} setCurrentUsername={setCurrentUser}/>}
+      {showLogin && <Login setShowLogin={setShowLogin} setCurrentUser={setCurrentUser} myStorage = {myStorage} />}
     </ReactMapGL>
   );
 }
