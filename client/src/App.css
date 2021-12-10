@@ -79,7 +79,7 @@ textarea {
 
 .button {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   border: none;
   padding: 5px;
   border-radius: 5px;
