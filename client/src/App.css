@@ -31,6 +31,11 @@ label {
   font-size: 12px;
 }
 
+.date-delete {
+  display: flex;
+  justify-content: space-between;
+}
+
 form {
   width: 250px;
   height: 250px;
@@ -102,5 +107,18 @@ textarea {
 
 .search{
   background-color: slateblue;
-
+  margin-left: 5px;
+  margin-right: 5px;
 }
+
+.search:hover{
+  font-weight: bold;
+  
+}
+
+.search-field {
+  border-radius: 5px;
+  width: 150px;
+  text-align: center;
+}
+

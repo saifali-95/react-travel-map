@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import RoomIcon from "@mui/icons-material/Room";
 import StarIcon from "@mui/icons-material/Star";
+import DeleteIcon from '@mui/icons-material/Delete';
 import axios from "axios";
 import "./App.css";
 import { format } from "timeago.js";
@@ -158,7 +159,12 @@ function App() {
                   Created by{" "}
                   <b>{p.username}</b>
                 </span>
-                <span className="date">{format(p.createdAt)}</span>
+                <div className="date-delete">
+                  <span className="date">{format(p.createdAt)}</span>
+                  <DeleteIcon style={{color: "black"}} onClick={()=>setPopUpId(null)}/>
+                </div>
+
+                
               </div>
             </Popup>
           )}
@@ -220,7 +226,7 @@ function App() {
       {currentUser ? (
         <>
         <div className="button">
-          <input type="text" ref={citynameRef}/>
+          <input className="search-field" type="text" placeholder="Enter Location" ref={citynameRef}/>
           <button className="button search" onClick={handleSearch}>Search</button>
           <button className="button logout" onClick={handleLogout}>Logout</button>
         </div>
