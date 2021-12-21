@@ -2,6 +2,10 @@
 
 The react-travel-map App is designed for travellers to post reviews about there trip experience, places to visit, eat and shop. A user can also view reviews posted by other users. 
 
+# Heroku Deoployment
+
+https://react-travel-map-saif.herokuapp.com/
+
 ## Project Demo
 
 !["Screenshot of Home page"](https://github.com/saifali-95/react-travel-map/blob/master/Pictures/main-page.png)
